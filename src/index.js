@@ -4,25 +4,38 @@ import YTSearch from "youtube-api-search";
 
 import SearchBar from "./components/SearchBar";
 import VideoList from "./components/VideoList";
+import VideoDetail from "./components/VideoDetail";
 
-import { API_KEY } from "./apikey"; // just to get used to separating out api keys
+import { API_KEY } from "./apikey"; // just to separate out api keys
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { videos: [] };
+    this.state = {
+      videos: [],
+      selectedVideo: null
+    };
 
-    YTSearch({ key: API_KEY, term: 'react' }, videos => {
-      this.setState({ videos });
+    YTSearch({ key: API_KEY, term: "react tutorial" }, videos => {
+      this.setState({
+        videos: videos,
+        selectedVideo: videos[0]
+      });
       // this.setState({ videos: videos }); Above is equivalent to this - thank you ES6
     });
   }
   render() {
-    return <div>
-      <SearchBar />
-      <VideoList videos={this.state.videos} />
-    </div>;
+    return (
+      <div>
+        <SearchBar />
+        <VideoDetail video={this.state.selectedVideo} />
+        <VideoList
+          onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
+          videos={this.state.videos}
+        />
+      </div>
+    );
   }
 }
 
