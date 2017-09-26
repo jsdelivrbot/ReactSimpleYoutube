@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import YTSearch from "youtube-api-search";
@@ -17,18 +18,26 @@ class App extends Component {
       selectedVideo: null
     };
 
-    YTSearch({ key: API_KEY, term: "react tutorial" }, videos => {
+    this.videoSearch("kittens");
+  }
+
+  videoSearch(term) {
+    YTSearch({ key: API_KEY, term: term }, videos => {
       this.setState({
         videos: videos,
         selectedVideo: videos[0]
       });
-      // this.setState({ videos: videos }); Above is equivalent to this - thank you ES6
     });
   }
+
   render() {
+    const videoSearch = _.debounce(term => {
+      this.videoSearch(term);
+    }, 300);
+    
     return (
       <div>
-        <SearchBar />
+        <SearchBar onSearchTermChange={videoSearch} />
         <VideoDetail video={this.state.selectedVideo} />
         <VideoList
           onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
@@ -38,14 +47,5 @@ class App extends Component {
     );
   }
 }
-
-// example of a functional component - used when just taking in and outputting data
-// const App = () => {
-//   return (
-//     <div>
-//       <SearchBar />
-//     </div>
-//   );
-// };
 
 ReactDOM.render(<App />, document.getElementById("root"));
