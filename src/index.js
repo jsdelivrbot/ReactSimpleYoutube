@@ -34,10 +34,13 @@ class App extends Component {
     const videoSearch = _.debounce(term => {
       this.videoSearch(term);
     }, 300);
-    
+
     return (
       <div>
-        <SearchBar onSearchTermChange={videoSearch} />
+        <header>
+          <span className="pull-left brand_logo"><h3>&#9883; ReactTube</h3></span>
+          <SearchBar onSearchTermChange={videoSearch} />
+        </header>
         <VideoDetail video={this.state.selectedVideo} />
         <VideoList
           onVideoSelect={selectedVideo => this.setState({ selectedVideo })}

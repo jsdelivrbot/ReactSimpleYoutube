@@ -1,3 +1,26 @@
+body{
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::-webkit-input-placeholder{
+  color: #cdcdcd;
+}
+::-moz-placeholder{
+  color: #cdcdcd;
+}
+
+header{
+  border-bottom: 1px solid #ddd;
+  padding: 5px 0;
+  margin-bottom: 20px;
+}
+.brand_logo h3{
+  padding: 10px;
+  font-size: 1.5em;
+  color: red;
+}
+
 .search_bar{
   margin: 20px;
   text-align: center;
@@ -5,16 +28,31 @@
 .search_bar input{
   padding: 5px 10px;
   width: 75%;
+  border: 1px solid #ddd;
 }
 
 .video_item img{
   max-width: 64px;
 }
+.video_detail{
+  text-align: left;
+}
 .video_detail .details{
   margin-top: 10px;
-  padding: 10px;
+  padding: 15px;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+.video_detail .details .desc_text{
+  color: #999;
+}
+.video_detail h4{
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.media_left{
+  float: left;
+  margin: 0 15px 10px 0;
 }
 
 .list-group-item{
